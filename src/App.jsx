@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import NavBar from './NavBar';
-import MainContent from './MainContent';
+import ListBox from './ListBox';
 import Logo from './Logo';
-import Search from './Search';
+import MainContent from './MainContent';
+import NavBar from './NavBar';
 import NumResults from './NumResults';
+import Search from './Search';
+import WatchedBox from './WatchedBox';
 
 const tempMovieData = [
   {
@@ -40,7 +42,11 @@ export default function App() {
         <NumResults movies={movies} />
       </NavBar>
 
-      <MainContent movies={movies} />
+      {/* <MainContent movies={movies} /> */}
+      <MainContent>
+        <ListBox movies={movies} />
+        <WatchedBox />
+      </MainContent>
     </React.Fragment>
   );
 }
