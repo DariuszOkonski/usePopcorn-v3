@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import NavBar from './NavBar';
 import MainContent from './MainContent';
+import Logo from './Logo';
+import Search from './Search';
+import NumResults from './NumResults';
 
 const tempMovieData = [
   {
@@ -31,7 +34,12 @@ export default function App() {
 
   return (
     <React.Fragment>
-      <NavBar movies={movies} />
+      <NavBar>
+        <Logo />
+        <Search />
+        <NumResults movies={movies} />
+      </NavBar>
+
       <MainContent movies={movies} />
     </React.Fragment>
   );
