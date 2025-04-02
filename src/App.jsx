@@ -31,7 +31,7 @@ export default function App() {
 
   return (
     <React.Fragment>
-      <NavBar />
+      <NavBar movies={movies} />
       <MainContent movies={movies} />
     </React.Fragment>
   );
