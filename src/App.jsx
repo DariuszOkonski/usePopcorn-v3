@@ -6,6 +6,7 @@ import NavBar from './NavBar';
 import NumResults from './NumResults';
 import Search from './Search';
 import WatchedBox from './WatchedBox';
+import MovieList from './MovieList';
 
 const tempMovieData = [
   {
@@ -44,7 +45,9 @@ export default function App() {
 
       {/* <MainContent movies={movies} /> */}
       <MainContent>
-        <ListBox movies={movies} />
+        <ListBox>
+          <MovieList movies={movies} />
+        </ListBox>
         <WatchedBox />
       </MainContent>
     </React.Fragment>
