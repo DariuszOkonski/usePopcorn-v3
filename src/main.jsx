@@ -1,9 +1,24 @@
-import { StrictMode } from 'react';
+import React, { StrictMode, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import StarRating from './StarRating/StarRating.jsx';
 
-createRoot(document.getElementById('root')).render(
+function Test() {
+  const [movieRating, setMovieRating] = useState(0);
+
+  return (
+    <div>
+      <StarRating maxRating={10} color='blue' onSetRating={setMovieRating} />
+      <p>This movie was rated {movieRating} stars</p>
+    </div>
+  );
+}
+
+const rootElement = document.getElementById('root');
+if (!rootElement) {
+  throw new Error('Root element not found');
+}
+createRoot(rootElement).render(
   <StrictMode>
     <StarRating
       maxRating={5}
@@ -16,5 +31,7 @@ createRoot(document.getElementById('root')).render(
       className='test'
       defaultRating={3}
     />
+
+    <Test />
   </StrictMode>
 );
