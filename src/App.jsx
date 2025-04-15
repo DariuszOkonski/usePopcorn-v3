@@ -62,17 +62,36 @@ import ErrorMessage from './ErrorMessage';
 const KEY = '39d44eb9';
 
 export default function App() {
+  const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const query = 'interstellar';
+  // const tempQuery = 'interstellar';
+
+  // useEffect(function () {
+  //   console.log('After initial render');
+  // }, []);
+
+  // useEffect(function () {
+  //   console.log('After each render');
+  // });
+
+  // useEffect(
+  //   function () {
+  //     console.log('D');
+  //   },
+  //   [query]
+  // );
+
+  // console.log('During render');
 
   useEffect(() => {
     const fetchMovies = async () => {
       try {
         setIsLoading(true);
+        setError('');
         const res = await fetch(
           `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`
         );
@@ -94,13 +113,13 @@ export default function App() {
       }
     };
     fetchMovies();
-  }, []);
+  }, [query]);
 
   return (
     <React.Fragment>
       <NavBar>
         <Logo />
-        <Search />
+        <Search query={query} setQuery={setQuery} />
         <NumResults movies={movies} />
       </NavBar>
 
