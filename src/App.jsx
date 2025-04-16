@@ -32,9 +32,11 @@ export default function App() {
   }
 
   function handleAddWatched(movie) {
-    console.log('movie: ', movie);
-
     setWatched((watched) => [...watched, movie]);
+  }
+
+  function handleDeleteWatched(id) {
+    setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
 
   useEffect(() => {
@@ -100,7 +102,10 @@ export default function App() {
           ) : (
             <React.Fragment>
               <WatchedSummary watched={watched} />
-              <WatchedMoviesList watched={watched} />
+              <WatchedMoviesList
+                watched={watched}
+                onDeleteWatched={handleDeleteWatched}
+              />
             </React.Fragment>
           )}
         </Box>
