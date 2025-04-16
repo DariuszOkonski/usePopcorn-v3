@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import Box from './Box';
 import Logo from './Logo';
@@ -67,25 +67,6 @@ export default function App() {
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-
-  // const tempQuery = 'interstellar';
-
-  // useEffect(function () {
-  //   console.log('After initial render');
-  // }, []);
-
-  // useEffect(function () {
-  //   console.log('After each render');
-  // });
-
-  // useEffect(
-  //   function () {
-  //     console.log('D');
-  //   },
-  //   [query]
-  // );
-
-  // console.log('During render');
 
   useEffect(() => {
     const fetchMovies = async () => {
