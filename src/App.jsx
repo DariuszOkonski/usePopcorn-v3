@@ -31,6 +31,12 @@ export default function App() {
     setSelectedId(null);
   }
 
+  function handleAddWatched(movie) {
+    console.log('movie: ', movie);
+
+    setWatched((watched) => [...watched, movie]);
+  }
+
   useEffect(() => {
     const fetchMovies = async () => {
       try {
@@ -88,6 +94,7 @@ export default function App() {
             <MovieDetails
               selectedId={selectedId}
               onCloseMovie={handleCloseMovie}
+              onAddWatched={handleAddWatched}
             />
           ) : (
             <React.Fragment>
