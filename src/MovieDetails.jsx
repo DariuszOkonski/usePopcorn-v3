@@ -5,7 +5,7 @@ import Loader from './Loader';
 
 const KEY = '39d44eb9';
 
-const MovieDetails = ({ selectedId, onCloseMovie, onAddWatched }) => {
+const MovieDetails = ({ selectedId, onCloseMovie, onAddWatched, watched }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState(0);
   const [movie, setMovie] = useState({
@@ -20,6 +20,11 @@ const MovieDetails = ({ selectedId, onCloseMovie, onAddWatched }) => {
     Director: '',
     Genre: '',
   });
+
+  const isWatched = watched.map((move) => move.imdbID).includes(selectedId);
+  const watchedUserRating = watched.find(
+    (movie) => movie.imdbID === selectedId
+  )?.userRating;
 
   const {
     Title: title,
@@ -90,15 +95,23 @@ const MovieDetails = ({ selectedId, onCloseMovie, onAddWatched }) => {
 
           <section>
             <div className='rating'>
-              <StarRating
-                maxRating={10}
-                size={24}
-                onSetRating={setUserRating}
-              />
-              {userRating > 0 && (
-                <button className='btn-add' onClick={handleAdd}>
-                  + Add to list
-                </button>
+              {!isWatched ? (
+                <React.Fragment>
+                  <StarRating
+                    maxRating={10}
+                    size={24}
+                    onSetRating={setUserRating}
+                  />
+                  {userRating > 0 && (
+                    <button className='btn-add' onClick={handleAdd}>
+                      + Add to list
+                    </button>
+                  )}
+                </React.Fragment>
+              ) : (
+                <p>
+                  You rated this movie {watchedUserRating} <span>⭐</span>
+                </p>
               )}
             </div>
             <p>
