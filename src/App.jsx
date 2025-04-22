@@ -16,7 +16,7 @@ import MovieDetails from './MovieDetails';
 const KEY = '39d44eb9';
 
 export default function App() {
-  const [query, setQuery] = useState('interstellar');
+  const [query, setQuery] = useState('');
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

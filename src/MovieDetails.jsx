@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import StarRating from './StarRating/StarRating';
 import Loader from './Loader';
