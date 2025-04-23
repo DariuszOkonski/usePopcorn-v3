@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import Box from './Box';
 import Logo from './Logo';
@@ -76,6 +75,8 @@ export default function App() {
       setError('');
       return;
     }
+
+    handleCloseMovie();
     fetchMovies();
 
     return () => {
@@ -91,7 +92,6 @@ export default function App() {
         <NumResults movies={movies} />
       </NavBar>
 
-      {/* <MainContent movies={movies} /> */}
       <MainContent>
         <Box>
           {isLoading && <Loader />}
