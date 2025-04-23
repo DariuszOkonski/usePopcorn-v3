@@ -21,7 +21,6 @@ export default function App() {
     const storedValue = localStorage.getItem('watched');
     return storedValue ? JSON.parse(storedValue) : [];
   });
-  // const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedId, setSelectedId] = useState(null);
@@ -36,8 +35,6 @@ export default function App() {
 
   function handleAddWatched(movie) {
     setWatched((watched) => [...watched, movie]);
-
-    // localStorage.setItem('watched', JSON.stringify([...watched, movie]));
   }
 
   function handleDeleteWatched(id) {
