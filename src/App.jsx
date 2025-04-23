@@ -11,19 +11,19 @@ import WatchedSummary from './WatchedSummary';
 import Loader from './Loader';
 import ErrorMessage from './ErrorMessage';
 import MovieDetails from './MovieDetails';
+import { useMovies } from './useMovies';
 
-const KEY = '39d44eb9';
+// const KEY = '39d44eb9';
 
 export default function App() {
   const [query, setQuery] = useState('');
-  const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState(function () {
     const storedValue = localStorage.getItem('watched');
     return storedValue ? JSON.parse(storedValue) : [];
   });
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
   const [selectedId, setSelectedId] = useState(null);
+
+  const { movies, isLoading, error } = useMovies(query, handleCloseMovie);
 
   function handleSelectMovie(id) {
     setSelectedId((selectedId) => (id === selectedId ? null : id));
@@ -44,52 +44,6 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem('watched', JSON.stringify(watched));
   }, [watched]);
-
-  useEffect(() => {
-    const controller = new AbortController();
-
-    const fetchMovies = async () => {
-      try {
-        setIsLoading(true);
-        setError('');
-        const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${KEY}&s=${query}`,
-          { signal: controller.signal }
-        );
-
-        if (!res.ok) {
-          throw new Error('Something went wrong with fetching movies...');
-        }
-
-        const data = await res.json();
-        if (data.Response === 'False') {
-          throw new Error('Movie not found');
-        }
-
-        setMovies(data.Search);
-        setError('');
-      } catch (err) {
-        if (err.name !== 'AbortError') {
-          setError(err.message);
-        }
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    if (query.length < 3) {
-      setMovies([]);
-      setError('');
-      return;
-    }
-
-    handleCloseMovie();
-    fetchMovies();
-
-    return () => {
-      controller.abort();
-    };
-  }, [query]);
 
   return (
     <React.Fragment>
