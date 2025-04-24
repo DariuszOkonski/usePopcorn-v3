@@ -1,32 +1,19 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
+import { useKey } from './useKey';
 
 function Search({ query, setQuery }) {
-  const inputElement = useRef(null);
+  const inputEl = useRef(null);
 
-  useEffect(() => {
-    function callback(e) {
-      if (document.activeElement === inputElement.current) return;
-
-      if (e.code === 'Enter') {
-        inputElement.current.focus();
-        setQuery('');
-      }
-    }
-
-    document.addEventListener('keydown', callback);
-
-    if (inputElement.current) {
-      inputElement.current.focus();
-    }
-
-    return () => {
-      document.removeEventListener('keydown', callback);
-    };
-  }, [setQuery]);
+  useKey('Enter', () => {
+    if(document.activeElement === inputEl.current)
+      return;
+    inputEl.current.focus();
+    setQuery('')
+  })
 
   return (
     <input
-      ref={inputElement}
+      ref={inputEl}
       className='search'
       type='text'
       placeholder='Search movies...'
